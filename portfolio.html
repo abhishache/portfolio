@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhishek Sharma — Data Analyst · Dubai</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Cormorant:wght@300;400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   ABHISHEK SHARMA — PORTFOLIO v4
+   PALETTE: Malachite by Figma
+   #EBEBEB · #575757 · #9CDAC9 · #99978B · #45BA9A
+   Aesthetic: "Mineral Terminal" — deep slate base,
+   malachite crystal accents, warm stone neutrals
+   ═══════════════════════════════════════════════ */
+
+:root {
+  /* Backgrounds — derived from darkening the neutral palette */
+  --bg:      #0c0e0d;
+  --bg2:     #111412;
+  --bg3:     #161a18;
+  --bg4:     #1c211e;
+  --bg5:     #222825;
+
+  /* Malachite palette primaries */
+  --mal:     #45BA9A;   /* malachite green — primary accent */
+  --mal-l:   #9CDAC9;   /* soft teal — secondary accent / highlights */
+  --mal-xl:  #c8ede6;   /* lightest tint — glows */
+  --stone:   #99978B;   /* warm stone grey — body text warm */
+  --mid:     #575757;   /* mid grey — muted elements */
+  --light:   #EBEBEB;   /* off-white — headings / bright text */
+
+  /* Derived for chart variety */
+  --terra:   #3a8a74;   /* deeper malachite for contrast */
+  --terra-l: #5db89e;
+  --clay:    #6a8f86;   /* blue-green clay */
+  --sand:    #b8b5aa;   /* light stone */
+  --cream:   #EBEBEB;   /* = --light */
+  --parch:   #d4d0c8;
+  --warm:    #99978B;   /* = --stone */
+  --muted:   #575757;   /* = --mid */
+  --faint:   #1c211e;
+  --faint2:  #161a18;
+
+  /* ochre aliases → map to malachite for all legacy references */
+  --ochre:   #45BA9A;
+  --ochre-l: #9CDAC9;
+  --ochre-xl:#c8ede6;
+  --moss:    #3a8a74;
+  --moss-l:  #9CDAC9;
+  --moss-xl: #c8ede6;
+
+  --border:  rgba(69,186,154,0.12);
+  --border2: rgba(69,186,154,0.07);
+  --glow-o:  rgba(69,186,154,0.15);
+  --glow-m:  rgba(156,218,201,0.12);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 13px; }
+
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 300;
+  line-height: 1.75;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ──────────── CURSOR ──────────── */
+#cur { position:fixed;width:8px;height:8px;background:var(--ochre);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s,background .2s; }
+#cur-r { position:fixed;width:32px;height:32px;border:1px solid rgba(69,186,154,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .1s,top .1s,width .3s,height .3s,opacity .3s;opacity:.6; }
+body:has(a:hover,button:hover) #cur { transform:translate(-50%,-50%) scale(2);background:var(--moss-l); }
+body:has(a:hover,button:hover) #cur-r { width:50px;height:50px;border-color:var(--moss-l);opacity:.8; }
+
+/* ──────────── GRAIN ──────────── */
+body::before {
+  content:'';position:fixed;inset:0;z-index:998;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23f)' opacity='.03'/%3E%3C/svg%3E");
+}
+
+/* ──────────── NAV ──────────── */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 5vw;
+  background:rgba(12,14,13,.88);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+}
+.nav-mark {
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:22px;font-weight:600;
+  color:var(--ochre-l);letter-spacing:-.5px;
+  text-decoration:none;
+}
+.nav-mark small { font-family:'JetBrains Mono',monospace;font-style:normal;font-size:8px;color:var(--muted);margin-left:6px;vertical-align:middle;letter-spacing:.12em; }
+nav ul { list-style:none;display:flex;gap:26px;align-items:center; }
+nav ul a {
+  color:var(--muted);text-decoration:none;
+  font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  transition:color .2s;position:relative;
+}
+nav ul a.active, nav ul a:hover { color:var(--ochre-l); }
+nav ul a::after { content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--ochre);transition:width .25s; }
+nav ul a.active::after, nav ul a:hover::after { width:100%; }
+.nav-ping { display:flex;align-items:center;gap:7px;font-size:9px;color:var(--muted); }
+.ping-dot { width:5px;height:5px;border-radius:50%;background:var(--moss-l);box-shadow:0 0 8px var(--moss);animation:pulse 2.4s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(.8)} }
+
+/* ──────────── SHARED ──────────── */
+section { position:relative;z-index:1;padding:88px 5vw; }
+.label-row { display:flex;align-items:center;gap:14px;margin-bottom:18px; }
+.lbl-num { font-size:9px;color:var(--muted);padding:3px 8px;border:1px solid var(--faint);border-radius:2px;letter-spacing:.14em; }
+.lbl-txt { font-size:9px;color:var(--ochre);letter-spacing:.2em;text-transform:uppercase; }
+.lbl-line { flex:1;height:1px;background:linear-gradient(90deg,var(--ochre),transparent);opacity:.2; }
+
+h2 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(36px,4.5vw,60px);
+  font-weight:700;line-height:1.05;letter-spacing:-1.5px;
+  color:var(--cream);margin-bottom:50px;
+}
+h2 em { font-style:italic;color:var(--ochre-l); }
+h2 small { display:block;font-family:'JetBrains Mono',monospace;font-size:.28em;font-weight:300;letter-spacing:.04em;color:var(--warm);margin-top:8px; }
+
+.reveal { opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease; }
+.reveal.vis { opacity:1;transform:none; }
+.d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s} .d4{transition-delay:.32s}
+
+/* ══════════════════════════════════
+   HERO
+   ══════════════════════════════════ */
+#hero {
+  min-height:100vh;display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;gap:48px;
+  padding-top:120px;padding-bottom:60px;
+  overflow:hidden;
+}
+
+/* Animated dot-grid background */
+#hero::before {
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(69,186,154,.08) 1px,transparent 1px);
+  background-size:28px 28px;
+  animation:gridShift 20s linear infinite;
+}
+@keyframes gridShift { 0%{background-position:0 0} 100%{background-position:28px 28px} }
+
+.hero-left { position:relative;z-index:2; }
+
+.hero-eyebrow {
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ochre);margin-bottom:24px;
+  padding:6px 14px;
+  border:1px solid rgba(69,186,154,.2);
+  border-radius:2px;background:rgba(69,186,154,.04);
+}
+.hero-eyebrow::before { content:'';width:16px;height:1px;background:var(--ochre); }
+
+h1 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(52px,6vw,84px);
+  font-weight:700;line-height:.98;
+  letter-spacing:-3px;color:var(--cream);
+  margin-bottom:8px;
+}
+h1 em { font-style:italic;color:var(--ochre-l);display:block; }
+
+.hero-role {
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:clamp(17px,2vw,24px);
+  color:var(--warm);font-weight:400;margin-bottom:24px;letter-spacing:-.3px;
+}
+
+.term-line {
+  font-size:11px;color:var(--moss-xl);
+  padding:10px 14px;margin-bottom:28px;
+  border-left:2px solid var(--moss);
+  background:rgba(69,186,154,.06);
+  border-radius:0 3px 3px 0;
+  min-height:36px;
+}
+.term-line::before { content:'$ ';color:var(--moss);font-weight:500; }
+#typed-text { color:var(--moss-xl); }
+#blink { color:var(--moss-l);animation:blink .7s step-end infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+.hero-btns { display:flex;gap:12px;flex-wrap:wrap; }
+.btn {
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 22px;border-radius:2px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  text-decoration:none;border:none;cursor:none;
+  transition:all .22s;
+}
+.btn-primary { background:var(--ochre);color:var(--bg);font-weight:500; }
+.btn-primary:hover { background:var(--ochre-xl);transform:translateY(-2px);box-shadow:0 8px 24px rgba(69,186,154,.35); }
+.btn-ghost { background:transparent;color:var(--warm);border:1px solid var(--border); }
+.btn-ghost:hover { border-color:var(--ochre);color:var(--ochre);transform:translateY(-2px); }
+
+/* HERO RIGHT — stat cards + radar */
+.hero-right { display:flex;flex-direction:column;gap:16px;z-index:2; }
+
+.stat-grid { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
+.stat-card {
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:6px;padding:18px 16px;
+  position:relative;overflow:hidden;transition:background .2s;
+}
+.stat-card:hover { background:var(--bg3); }
+.stat-card::before {
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--g, linear-gradient(90deg,var(--ochre),var(--terra)));
+}
+.stat-n {
+  font-family:'Cormorant Garamond',serif;
+  font-size:32px;font-weight:700;color:var(--ochre-l);
+  line-height:1;margin-bottom:4px;
+}
+.stat-n.g { color:var(--moss-l); }
+.stat-n.r { color:var(--terra-l); }
+.stat-l { font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em; }
+
+.radar-card {
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:6px;padding:20px;
+  position:relative;
+}
+.radar-card::before {
+  content:'skill_matrix.svg';position:absolute;top:10px;right:14px;
+  font-size:8px;color:var(--muted);letter-spacing:.08em;
+}
+#radarCvs { display:block;margin:0 auto; }
+
+/* ══════════════════════════════════
+   DASHBOARDS — interactive hub
+   ══════════════════════════════════ */
+#dashboards { background:var(--bg2);border-top:1px solid var(--border); }
+
+.dash-intro { max-width:560px;color:var(--warm);line-height:1.9;margin-bottom:44px; }
+
+/* TAB BAR */
+.tab-bar {
+  display:flex;gap:2px;margin-bottom:2px;
+  border-bottom:1px solid var(--border);
+  overflow-x:auto;scrollbar-width:none;
+}
+.tab-bar::-webkit-scrollbar { display:none; }
+.tab-btn {
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  letter-spacing:.12em;text-transform:uppercase;
+  padding:10px 18px;background:transparent;
+  border:none;border-bottom:2px solid transparent;
+  color:var(--muted);cursor:none;transition:all .2s;
+  white-space:nowrap;
+}
+.tab-btn.active { color:var(--ochre-l);border-bottom-color:var(--ochre); }
+.tab-btn:hover { color:var(--warm); }
+
+.tab-panel { display:none;animation:fadeIn .3s ease; }
+.tab-panel.active { display:block; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+
+/* PANEL GRID */
+.panel-grid {
+  display:grid;gap:2px;
+  background:rgba(69,186,154,.05);
+  border:1px solid var(--border);
+  border-top:none;border-radius:0 0 8px 8px;
+  overflow:hidden;
+}
+.p-2 { grid-template-columns:1fr 1fr; }
+.p-3 { grid-template-columns:2fr 1fr; }
+.p-3b { grid-template-columns:1fr 2fr; }
+.p-4 { grid-template-columns:1fr 1fr 1fr 1fr; }
+
+.pcell {
+  background:var(--bg3);padding:26px 22px;
+  position:relative;overflow:hidden;
+  transition:background .2s;
+}
+.pcell:hover { background:var(--bg4); }
+.pcell.span2 { grid-column:span 2; }
+.pcell.span3 { grid-column:span 3; }
+
+.cell-tag {
+  font-size:8px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ochre);margin-bottom:4px;
+}
+.cell-h {
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px;font-weight:600;color:var(--cream);
+  margin-bottom:2px;line-height:1.2;
+}
+.cell-sub { font-size:10px;color:var(--muted);margin-bottom:18px; }
+.file-badge {
+  position:absolute;top:10px;right:12px;
+  font-size:7px;color:rgba(156,218,201,.4);letter-spacing:.08em;
+}
+
+/* ── NPS LINE CHART ── */
+.nps-svg { width:100%;overflow:visible;cursor:crosshair; }
+.tooltip {
+  position:fixed;background:var(--bg4);
+  border:1px solid var(--border);border-radius:4px;
+  padding:8px 12px;font-size:10px;color:var(--cream);
+  pointer-events:none;z-index:900;opacity:0;
+  transition:opacity .15s;
+}
+
+/* ── BAR CHARTS ── */
+.bar-chart { display:flex;flex-direction:column;gap:9px; }
+.brow { display:flex;align-items:center;gap:10px; }
+.b-name { font-size:10px;color:var(--sand);flex-shrink:0; }
+.b-track { flex:1;height:22px;background:rgba(255,255,255,.04);border-radius:2px;overflow:hidden; }
+.b-fill {
+  height:100%;border-radius:2px;
+  display:flex;align-items:center;padding-left:9px;
+  font-size:10px;font-weight:500;color:rgba(0,0,0,.8);
+  width:0;transition:width 1.3s cubic-bezier(.22,.68,0,1.2);
+  white-space:nowrap;
+}
+.b-val { font-size:10px;color:var(--ochre);width:48px;flex-shrink:0;text-align:right; }
+
+/* ── RING METERS ── */
+.rings { display:flex;gap:14px;flex-wrap:wrap;justify-content:center; }
+.ring-w { display:flex;flex-direction:column;align-items:center;gap:6px; }
+.ring-n { font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;text-align:center; }
+.ring-s { font-size:7px;color:var(--muted);text-align:center;margin-top:-4px; }
+
+/* ── FUNNEL ── */
+.funnel { display:flex;flex-direction:column;gap:8px; }
+.f-step { display:grid;grid-template-columns:100px 1fr 54px;align-items:center;gap:10px; }
+.f-lbl { font-size:10px;color:var(--sand);text-align:right; }
+.f-track { height:28px;background:rgba(255,255,255,.04);border-radius:2px;overflow:hidden; }
+.f-fill {
+  height:100%;border-radius:2px;
+  display:flex;align-items:center;padding-left:10px;
+  font-size:10px;font-weight:500;color:rgba(0,0,0,.85);
+  width:0;transition:width 1.4s cubic-bezier(.22,.68,0,1.2);
+  white-space:nowrap;
+}
+.f-v { font-size:10px;color:var(--ochre-l); }
+
+/* ── WATERFALL / DETRACTOR ── */
+.det-chart { width:100%;overflow:visible; }
+
+/* ── MINI KPI CARDS ── */
+.kpi-row { display:flex;gap:10px;flex-wrap:wrap; }
+.kpi {
+  flex:1;min-width:100px;
+  background:var(--bg4);border:1px solid var(--border2);
+  border-radius:4px;padding:12px 14px;
+}
+.kpi-v {
+  font-family:'Cormorant Garamond',serif;
+  font-size:24px;font-weight:700;color:var(--ochre-l);
+  line-height:1;margin-bottom:3px;
+}
+.kpi-v.g { color:var(--moss-l); }
+.kpi-v.r { color:var(--terra-l); }
+.kpi-l { font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em; }
+
+/* ── EG MAP / GRID ── */
+.city-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:8px; }
+.city-card {
+  background:var(--bg4);border:1px solid var(--border2);
+  border-radius:4px;padding:12px;text-align:center;
+  transition:all .2s;cursor:default;
+}
+.city-card:hover { border-color:var(--ochre);transform:scale(1.03); }
+.city-n { font-size:9px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px; }
+.city-total {
+  font-family:'Cormorant Garamond',serif;
+  font-size:24px;font-weight:700;color:var(--ochre-l);
+  line-height:1;margin-bottom:4px;
+}
+.city-bar { height:3px;border-radius:2px;background:var(--ochre);margin:0 auto;transition:width .8s ease; }
+
+/* ── SCATTER / BUBBLE ── */
+.scatter-wrap { position:relative;width:100%;padding-bottom:52%; }
+.scatter-wrap svg { position:absolute;inset:0;width:100%;height:100%; }
+
+/* ══════════════════════════════════
+   EXPERIENCE
+   ══════════════════════════════════ */
+#experience { background:var(--bg);border-top:1px solid var(--border); }
+
+.timeline { position:relative;padding-left:20px; }
+.timeline::before {
+  content:'';position:absolute;left:0;top:10px;bottom:10px;width:1px;
+  background:linear-gradient(180deg,var(--ochre) 0%,var(--moss) 60%,transparent 100%);
+  opacity:.5;
+}
+
+.te {
+  position:relative;padding:0 0 44px 42px;
+  opacity:0;transform:translateX(-16px);
+  transition:all .55s ease;
+}
+.te.vis { opacity:1;transform:none; }
+.te::before {
+  content:'';position:absolute;left:-4px;top:8px;
+  width:9px;height:9px;border-radius:50%;
+  background:var(--ochre);border:2px solid var(--bg);
+  box-shadow:0 0 12px rgba(69,186,154,.5);
+}
+.te:nth-child(even)::before { background:var(--moss); box-shadow:0 0 12px rgba(69,186,154,.5); }
+.te:nth-child(3)::before { background:var(--terra); }
+
+.te-head { display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:12px; }
+.te-role { font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;color:var(--cream);line-height:1.15;margin-bottom:3px; }
+.te-co { font-size:11px;color:var(--ochre);letter-spacing:.04em; }
+.te-period {
+  font-size:9px;color:var(--muted);
+  padding:4px 10px;background:var(--faint);
+  border:1px solid var(--border2);border-radius:2px;
+  white-space:nowrap;flex-shrink:0;
+}
+.te-pts { list-style:none;margin-bottom:14px; }
+.te-pts li { font-size:11px;color:var(--warm);padding-left:14px;position:relative;margin-bottom:7px;line-height:1.75; }
+.te-pts li::before { content:'›';position:absolute;left:0;color:var(--muted); }
+
+.tag-row { display:flex;gap:6px;flex-wrap:wrap; }
+.tag {
+  font-size:8px;letter-spacing:.06em;padding:3px 9px;border-radius:2px;
+  background:rgba(69,186,154,.07);border:1px solid rgba(69,186,154,.18);color:var(--ochre);
+}
+.tag.m { background:rgba(69,186,154,.07);border-color:rgba(69,186,154,.18);color:var(--moss-xl); }
+.tag.r { background:rgba(178,82,48,.07);border-color:rgba(178,82,48,.18);color:var(--terra-l); }
+
+/* ══════════════════════════════════
+   ABOUT
+   ══════════════════════════════════ */
+#about { background:var(--bg2);border-top:1px solid var(--border); }
+
+.about-layout { display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px; }
+.about-p { color:var(--warm);font-size:12px;line-height:1.95;margin-bottom:16px; }
+.about-p strong { color:var(--ochre-l);font-weight:400; }
+
+.tools-wrap { display:flex;flex-wrap:wrap;gap:7px;margin-top:28px; }
+.tool {
+  font-size:9px;padding:5px 11px;border-radius:20px;
+  background:var(--faint);border:1px solid var(--border2);
+  color:var(--muted);transition:all .2s;cursor:default;
+}
+.tool:hover { background:rgba(69,186,154,.08);border-color:rgba(69,186,154,.3);color:var(--ochre-l);transform:scale(1.04); }
+
+.skill-panel {
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:8px;padding:24px;
+}
+.sp-title { font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:20px; }
+.sk-rows { display:flex;flex-direction:column;gap:11px; }
+.sk { display:flex;align-items:center;gap:12px; }
+.sk-n { font-size:10px;color:var(--sand);width:120px;flex-shrink:0; }
+.sk-tr { flex:1;height:2px;background:rgba(255,255,255,.07);border-radius:1px;overflow:hidden; }
+.sk-f {
+  height:100%;border-radius:1px;
+  background:linear-gradient(90deg,var(--ochre),var(--terra));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 1.2s cubic-bezier(.22,.68,0,1.2);
+}
+.sk-f.vis { transform:scaleX(1); }
+.sk-p { font-size:9px;color:var(--muted);width:28px;text-align:right; }
+
+/* ══════════════════════════════════
+   EDUCATION
+   ══════════════════════════════════ */
+#education { background:var(--bg);border-top:1px solid var(--border); }
+
+.edu-split { display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:36px; }
+.edu-c {
+  background:var(--bg3);padding:26px;
+  transition:background .2s;
+}
+.edu-c:hover { background:var(--bg4); }
+.edu-deg { font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--cream);line-height:1.2;margin-bottom:8px; }
+.edu-sch { color:var(--ochre);font-size:11px;margin-bottom:3px; }
+.edu-yr { color:var(--muted);font-size:9px; }
+
+.cert-row { display:flex;flex-wrap:wrap;gap:9px; }
+.cert {
+  display:flex;align-items:center;gap:8px;
+  padding:9px 14px;background:var(--bg3);
+  border:1px solid var(--border);border-radius:4px;
+  font-size:10px;color:var(--warm);transition:all .2s;
+}
+.cert:hover { border-color:var(--ochre);color:var(--ochre-l); }
+.cert-ico { font-size:13px; }
+
+/* ══════════════════════════════════
+   CONTACT
+   ══════════════════════════════════ */
+#contact { background:var(--bg2);border-top:1px solid var(--border); }
+
+.contact-layout { display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start; }
+.contact-blurb { color:var(--warm);font-size:12px;line-height:1.9;margin-bottom:30px; }
+.c-links { display:flex;flex-direction:column;gap:10px; }
+.c-lnk {
+  display:flex;align-items:center;gap:16px;
+  padding:13px 18px;background:var(--bg3);
+  border:1px solid var(--border);border-radius:4px;
+  text-decoration:none;color:var(--warm);
+  font-size:11px;transition:all .2s;
+}
+.c-lnk:hover { border-color:var(--ochre-l);color:var(--ochre-l);transform:translateX(5px);box-shadow:0 4px 20px rgba(69,186,154,.1); }
+.c-ico { width:20px;text-align:center;font-size:14px; }
+.c-arr { margin-left:auto;color:var(--muted);transition:transform .2s; }
+.c-lnk:hover .c-arr { transform:translateX(4px); }
+
+.open-card {
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:8px;padding:28px;position:relative;overflow:hidden;
+}
+.open-card::before {
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--ochre),var(--terra),var(--moss));
+}
+.oc-title { font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--cream);margin-bottom:18px; }
+.oc-item { display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border2);font-size:11px;color:var(--warm); }
+.oc-item:last-child { border:none; }
+.oc-ico { font-size:14px; }
+.oc-hl { color:var(--ochre-l); }
+
+/* ══════════════════════════════════
+   FOOTER
+   ══════════════════════════════════ */
+footer {
+  z-index:1;position:relative;padding:20px 5vw;
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:9px;color:var(--muted);letter-spacing:.06em;
+}
+footer span { color:var(--ochre); }
+
+/* TOOLTIP */
+.tip {
+  position:fixed;
+  background:var(--bg4);border:1px solid var(--border);
+  border-radius:4px;padding:8px 12px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--cream);pointer-events:none;z-index:900;
+  opacity:0;transition:opacity .12s;
+  white-space:nowrap;
+}
+
+/* RESPONSIVE */
+@media(max-width:820px){
+  #hero,#about .about-layout,.contact-layout,.edu-split{grid-template-columns:1fr}
+  .p-2,.p-3,.p-3b,.p-4{grid-template-columns:1fr}
+  .pcell.span2,.pcell.span3{grid-column:span 1}
+  nav ul{display:none}
+  .stat-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-r"></div>
+<div class="tip" id="tip"></div>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="#hero" class="nav-mark">Abhishek Sharma <small>DATA</small></a>
+  <ul>
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#dashboards">Dashboards</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-ping">
+    <div class="ping-dot"></div>
+    Dubai, UAE
+  </div>
+</nav>
+
+<!-- ════════════════════════════════
+     HERO
+     ════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Sr. Data Analyst · Operations &amp; CRM</div>
+
+    <h1>Abhishek<br><em>Sharma</em></h1>
+
+    <div class="hero-role">MSc Big Data &amp; Cloud · 8+ Years · Dubai</div>
+
+    <div class="term-line"><span id="typed-text"></span><span id="blink">▌</span></div>
+
+    <div class="hero-btns">
+      <a href="#dashboards" class="btn btn-primary">↓ View Dashboards</a>
+      <a href="#contact" class="btn btn-ghost">Open to Opportunities →</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="stat-grid">
+      <div class="stat-card" style="--g:linear-gradient(90deg,var(--ochre),var(--terra))">
+        <div class="stat-n" id="s1">0</div>
+        <div class="stat-l">Years Experience</div>
+      </div>
+      <div class="stat-card" style="--g:linear-gradient(90deg,var(--moss),var(--moss-l))">
+        <div class="stat-n g" id="s2">0</div>
+        <div class="stat-l">GCC Markets</div>
+      </div>
+      <div class="stat-card" style="--g:linear-gradient(90deg,var(--terra),var(--clay))">
+        <div class="stat-n r" id="s3">0</div>
+        <div class="stat-l">Dashboards Built</div>
+      </div>
+      <div class="stat-card" style="--g:linear-gradient(90deg,var(--ochre-l),var(--ochre))">
+        <div class="stat-n" id="s4">0%</div>
+        <div class="stat-l">Manual Work Saved</div>
+      </div>
+    </div>
+
+    <div class="radar-card">
+      <canvas id="radarCvs" width="340" height="230"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     DASHBOARDS
+     ════════════════════════════════ -->
+<section id="dashboards">
+  <div class="label-row reveal">
+    <div class="lbl-num">01</div>
+    <div class="lbl-txt">Live Dashboard Portfolio</div>
+    <div class="lbl-line"></div>
+  </div>
+  <h2 class="reveal">Data I've <em>built &amp; owned</em><small>Real analytics from production dashboards I design and maintain at eyewa</small></h2>
+
+  <p class="dash-intro reveal">
+    These visualisations are rendered directly from numbers extracted from dashboards I built — spanning CRM engagement, NPS health, eye-test booking funnels, loyalty tiers, warehouse status, and service recovery across 6 GCC markets.
+  </p>
+
+  <!-- TAB BAR -->
+  <div class="tab-bar reveal">
+    <button class="tab-btn active" data-tab="nps">NPS &amp; CX</button>
+    <button class="tab-btn" data-tab="crm">CRM Channels</button>
+    <button class="tab-btn" data-tab="etb">ETB Funnel</button>
+    <button class="tab-btn" data-tab="loyalty">Loyalty</button>
+    <button class="tab-btn" data-tab="ops">Ops &amp; Warehouse</button>
+  </div>
+
+  <!-- ── PANEL: NPS ── -->
+  <div class="tab-panel active" id="tab-nps">
+    <div class="panel-grid p-2">
+      <!-- NPS Line Chart -->
+      <div class="pcell span2">
+        <div class="file-badge">BI_NPS_Dashboard.pdf</div>
+        <div class="cell-tag">NPS · Nov 2024 → Mar 2026</div>
+        <div class="cell-h">Net Promoter Score — 17-Month Trend</div>
+        <div class="cell-sub">Overall · Offline · Online channels across 6 countries</div>
+        <svg class="nps-svg" id="npsSvg" viewBox="0 0 700 220" height="220">
+          <defs>
+            <linearGradient id="nGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#45BA9A" stop-opacity=".3"/>
+              <stop offset="100%" stop-color="#45BA9A" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="mGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#2d7a66" stop-opacity=".2"/>
+              <stop offset="100%" stop-color="#2d7a66" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <!-- Grid -->
+          <g id="npsGrid"></g>
+          <g id="npsLabels"></g>
+          <!-- Areas -->
+          <path id="npsAreaPath" fill="url(#nGrad)"/>
+          <path id="offAreaPath" fill="url(#mGrad)"/>
+          <!-- Lines -->
+          <path id="npsLinePath" fill="none" stroke="#45BA9A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="offLinePath" fill="none" stroke="#9CDAC9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 4"/>
+          <path id="onlLinePath" fill="none" stroke="#3a8a74" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 4"/>
+          <!-- Points (hover) -->
+          <g id="npsPoints"></g>
+          <!-- Legend -->
+          <circle cx="12" cy="210" r="5" fill="#45BA9A"/>
+          <text x="22" y="214" fill="#99978B" font-size="9" font-family="JetBrains Mono">Overall</text>
+          <line x1="78" y1="210" x2="95" y2="210" stroke="#9CDAC9" stroke-width="2" stroke-dasharray="6 3"/>
+          <text x="100" y="214" fill="#99978B" font-size="9" font-family="JetBrains Mono">Offline</text>
+          <line x1="156" y1="210" x2="173" y2="210" stroke="#3a8a74" stroke-width="2" stroke-dasharray="3 4"/>
+          <text x="178" y="214" fill="#99978B" font-size="9" font-family="JetBrains Mono">Online</text>
+        </svg>
+        <div class="kpi-row" style="margin-top:14px">
+          <div class="kpi"><div class="kpi-v">70</div><div class="kpi-l">Latest NPS</div></div>
+          <div class="kpi"><div class="kpi-v g">+44</div><div class="kpi-l">17-Mo Growth</div></div>
+          <div class="kpi"><div class="kpi-v r">26</div><div class="kpi-l">Period Low</div></div>
+          <div class="kpi"><div class="kpi-v">98K+</div><div class="kpi-l">Surveys Sent</div></div>
+          <div class="kpi"><div class="kpi-v">6</div><div class="kpi-l">Countries</div></div>
+        </div>
+      </div>
+
+      <!-- Detractor MoM -->
+      <div class="pcell">
+        <div class="file-badge">OPS_Customer_service.pdf</div>
+        <div class="cell-tag">Service Recovery</div>
+        <div class="cell-h">MoM Detractors</div>
+        <div class="cell-sub">Dec 2023 → May 2025</div>
+        <svg id="detSvg" viewBox="0 0 300 160" width="100%" height="160" style="overflow:visible"></svg>
+        <div class="kpi-row" style="margin-top:12px">
+          <div class="kpi"><div class="kpi-v">2,171</div><div class="kpi-l">KSA Detractors</div></div>
+          <div class="kpi"><div class="kpi-v r">1,057</div><div class="kpi-l">Peak Month</div></div>
+        </div>
+      </div>
+
+      <!-- Country NPS split -->
+      <div class="pcell">
+        <div class="file-badge">BI_NPS_Dashboard.pdf</div>
+        <div class="cell-tag">Geography</div>
+        <div class="cell-h">Detractors by Country</div>
+        <div class="cell-sub">Cumulative · All Periods</div>
+        <div class="bar-chart" id="countryDet" style="margin-top:8px">
+          <div class="brow"><div class="b-name" style="width:56px">KSA</div><div class="b-track"><div class="b-fill" style="background:var(--ochre)" data-w="100">2,171</div></div><div class="b-val">2,171</div></div>
+          <div class="brow"><div class="b-name" style="width:56px">UAE</div><div class="b-track"><div class="b-fill" style="background:var(--terra)" data-w="9.8">212</div></div><div class="b-val">212</div></div>
+          <div class="brow"><div class="b-name" style="width:56px">Kuwait</div><div class="b-track"><div class="b-fill" style="background:var(--moss)" data-w="8.2">179</div></div><div class="b-val">179</div></div>
+          <div class="brow"><div class="b-name" style="width:56px">Qatar</div><div class="b-track"><div class="b-fill" style="background:var(--clay)" data-w="2.8">60</div></div><div class="b-val">60</div></div>
+          <div class="brow"><div class="b-name" style="width:56px">Bahrain</div><div class="b-track"><div class="b-fill" style="background:var(--sand)" data-w="1.2">26</div></div><div class="b-val">26</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PANEL: CRM ── -->
+  <div class="tab-panel" id="tab-crm">
+    <div class="panel-grid p-3">
+      <!-- Channel rings -->
+      <div class="pcell">
+        <div class="file-badge">BI_CRM_Dashboard.pdf</div>
+        <div class="cell-tag">Braze · Last 4 Weeks</div>
+        <div class="cell-h">Channel Performance Rings</div>
+        <div class="cell-sub">Delivery &amp; Engagement Rates</div>
+        <div class="rings" id="crmRings" style="margin-top:12px"></div>
+      </div>
+
+      <!-- CRM Stats -->
+      <div class="pcell">
+        <div class="file-badge">CRM___Braze___CNC__.pdf</div>
+        <div class="cell-tag">Multi-Channel Scale</div>
+        <div class="cell-h">Cumulative Send Volume</div>
+        <div class="cell-sub">All channels combined</div>
+        <div class="bar-chart" id="sendVolume" style="margin-top:8px">
+          <div class="brow"><div class="b-name" style="width:72px">App Push</div><div class="b-track"><div class="b-fill" style="background:var(--ochre)" data-w="100">73.9M</div></div><div class="b-val">73.9M</div></div>
+          <div class="brow"><div class="b-name" style="width:72px">Email</div><div class="b-track"><div class="b-fill" style="background:var(--moss)" data-w="12.9">9.5M</div></div><div class="b-val">9.5M</div></div>
+          <div class="brow"><div class="b-name" style="width:72px">WhatsApp</div><div class="b-track"><div class="b-fill" style="background:var(--terra)" data-w="4.9">3.6M</div></div><div class="b-val">3.6M</div></div>
+          <div class="brow"><div class="b-name" style="width:72px">SMS</div><div class="b-track"><div class="b-fill" style="background:var(--clay)" data-w="1">~300K</div></div><div class="b-val">~300K</div></div>
+        </div>
+        <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border2)">
+          <div class="cell-tag" style="margin-bottom:10px">WhatsApp · Jan–Dec 2024 Read Rate</div>
+          <svg id="waSpark" viewBox="0 0 280 60" width="100%" height="60" style="overflow:visible"></svg>
+        </div>
+      </div>
+
+      <!-- Revenue by channel -->
+      <div class="pcell span2" style="grid-column:1/-1">
+        <div class="file-badge">CRM___Braze___CNC__.pdf</div>
+        <div class="cell-tag">Revenue Attribution · Nov 2024 – Jan 2025</div>
+        <div class="cell-h">CRM Daily Revenue Trend</div>
+        <div class="cell-sub">App Push vs Email vs CouponCode vs SMS vs WhatsApp</div>
+        <svg id="revSvg" viewBox="0 0 700 160" width="100%" height="160" style="overflow:visible;margin-top:10px"></svg>
+        <div class="kpi-row" style="margin-top:14px">
+          <div class="kpi"><div class="kpi-v">218K</div><div class="kpi-l">Jan 2025 Revenue</div></div>
+          <div class="kpi"><div class="kpi-v g">187K</div><div class="kpi-l">Dec 2024</div></div>
+          <div class="kpi"><div class="kpi-v">182K</div><div class="kpi-l">Nov 2024</div></div>
+          <div class="kpi"><div class="kpi-v r">iOS 77%</div><div class="kpi-l">Platform Share</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PANEL: ETB ── -->
+  <div class="tab-panel" id="tab-etb">
+    <div class="panel-grid p-3b">
+      <!-- Funnel -->
+      <div class="pcell">
+        <div class="file-badge">BI_ETB_Dashboard.pdf</div>
+        <div class="cell-tag">Eye Test Booking · Jan 2025–Mar 2026</div>
+        <div class="cell-h">Booking → Purchase Funnel</div>
+        <div class="cell-sub">Full conversion cascade across all markets</div>
+        <div class="funnel" id="etbFunnel" style="margin-top:16px">
+          <div class="f-step">
+            <div class="f-lbl">ETB Customers</div>
+            <div class="f-track"><div class="f-fill" style="background:var(--ochre)" data-w="100">134,357</div></div>
+            <div class="f-v">134K</div>
+          </div>
+          <div class="f-step">
+            <div class="f-lbl">Eye Tests Done</div>
+            <div class="f-track"><div class="f-fill" style="background:var(--moss)" data-w="49.5">66,478</div></div>
+            <div class="f-v">66.5K</div>
+          </div>
+          <div class="f-step">
+            <div class="f-lbl">Show-up Rate</div>
+            <div class="f-track"><div class="f-fill" style="background:var(--terra)" data-w="43.2">43.2%</div></div>
+            <div class="f-v">43.2%</div>
+          </div>
+          <div class="f-step">
+            <div class="f-lbl">ET Customers</div>
+            <div class="f-track"><div class="f-fill" style="background:var(--clay)" data-w="41.1">41.1% CVR</div></div>
+            <div class="f-v">55K</div>
+          </div>
+          <div class="f-step">
+            <div class="f-lbl">Purchases</div>
+            <div class="f-track"><div class="f-fill" style="background:var(--sand);color:#0c0e0d" data-w="11.7">11.7% CVR</div></div>
+            <div class="f-v">15.7K</div>
+          </div>
+          <div class="f-step">
+            <div class="f-lbl">Revenue</div>
+            <div class="f-track"><div class="f-fill" style="background:linear-gradient(90deg,var(--ochre-xl),var(--ochre));color:#0c0e0d" data-w="100">$2,915,566</div></div>
+            <div class="f-v">$2.9M</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ETB monthly + country split -->
+      <div class="pcell" style="display:flex;flex-direction:column;gap:20px">
+        <div>
+          <div class="file-badge">BI_ETB_Dashboard.pdf</div>
+          <div class="cell-tag">Monthly Booking Volume</div>
+          <div class="cell-h">ETB Customers · Recent Months</div>
+          <div class="cell-sub">Descending by recency</div>
+          <svg id="etbBar" viewBox="0 0 300 130" width="100%" height="130" style="margin-top:10px;overflow:visible"></svg>
+        </div>
+        <div style="padding-top:16px;border-top:1px solid var(--border2)">
+          <div class="cell-tag" style="margin-bottom:10px">Revenue by Country</div>
+          <div class="bar-chart" id="etbCountry">
+            <div class="brow"><div class="b-name" style="width:60px">KSA</div><div class="b-track"><div class="b-fill" style="background:var(--ochre)" data-w="83.6">$2.44M</div></div><div class="b-val">83.6%</div></div>
+            <div class="brow"><div class="b-name" style="width:60px">UAE</div><div class="b-track"><div class="b-fill" style="background:var(--terra)" data-w="11.4">$332K</div></div><div class="b-val">11.4%</div></div>
+            <div class="brow"><div class="b-name" style="width:60px">Other</div><div class="b-track"><div class="b-fill" style="background:var(--moss)" data-w="5">$143K</div></div><div class="b-val">5%</div></div>
+          </div>
+        </div>
+        <div style="padding-top:16px;border-top:1px solid var(--border2)">
+          <div class="cell-tag" style="margin-bottom:10px">Category Split by Revenue</div>
+          <div class="bar-chart" id="etbCat">
+            <div class="brow"><div class="b-name" style="width:60px">EG</div><div class="b-track"><div class="b-fill" style="background:var(--ochre-l);color:#0c0e0d" data-w="76.8">$2.24M</div></div><div class="b-val">77%</div></div>
+            <div class="brow"><div class="b-name" style="width:60px">SG</div><div class="b-track"><div class="b-fill" style="background:var(--moss)" data-w="12.4">$361K</div></div><div class="b-val">12%</div></div>
+            <div class="brow"><div class="b-name" style="width:60px">PCL</div><div class="b-track"><div class="b-fill" style="background:var(--terra)" data-w="3">$87K</div></div><div class="b-val">3%</div></div>
+            <div class="brow"><div class="b-name" style="width:60px">CCL</div><div class="b-track"><div class="b-fill" style="background:var(--clay)" data-w="2.5">$73K</div></div><div class="b-val">2%</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PANEL: LOYALTY ── -->
+  <div class="tab-panel" id="tab-loyalty">
+    <div class="panel-grid p-2">
+      <!-- AOV Bars -->
+      <div class="pcell">
+        <div class="file-badge">BI_Loyalty_Dashboard.pdf</div>
+        <div class="cell-tag">Loyalty · MTD Mar 2026</div>
+        <div class="cell-h">Average Order Value by Tier</div>
+        <div class="cell-sub">Loyalty customers spend 1.9× more than non-loyalty</div>
+        <div class="bar-chart" id="loyAOV" style="margin-top:14px">
+          <div class="brow"><div class="b-name" style="width:86px">Pro Max</div><div class="b-track"><div class="b-fill" style="background:var(--ochre-xl);color:#0c0e0d" data-w="100">$284 AOV</div></div><div class="b-val">$284</div></div>
+          <div class="brow"><div class="b-name" style="width:86px">Eyewa Pro</div><div class="b-track"><div class="b-fill" style="background:var(--ochre)" data-w="47.2">$134 AOV</div></div><div class="b-val">$134</div></div>
+          <div class="brow"><div class="b-name" style="width:86px">Eyewa Plus</div><div class="b-track"><div class="b-fill" style="background:var(--moss)" data-w="31">$88</div></div><div class="b-val">$88</div></div>
+          <div class="brow"><div class="b-name" style="width:86px">Non-Loyalty</div><div class="b-track"><div class="b-fill" style="background:var(--muted)" data-w="31">$88</div></div><div class="b-val">$88</div></div>
+        </div>
+
+        <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border2)">
+          <div class="cell-tag" style="margin-bottom:12px">Offline vs Online — AOV</div>
+          <div class="bar-chart" id="loyOnOff">
+            <div class="brow"><div class="b-name" style="width:86px">Offline AOV</div><div class="b-track"><div class="b-fill" style="background:var(--ochre)" data-w="100">$187</div></div><div class="b-val">$187</div></div>
+            <div class="brow"><div class="b-name" style="width:86px">Online AOV</div><div class="b-track"><div class="b-fill" style="background:var(--moss)" data-w="40.6">$76</div></div><div class="b-val">$76</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loyalty Donut + KPIs -->
+      <div class="pcell">
+        <div class="file-badge">BI_Loyalty_Dashboard.pdf</div>
+        <div class="cell-tag">Order Mix · MTD Mar 2026</div>
+        <div class="cell-h">Loyalty vs Non-Loyalty Orders</div>
+        <div class="cell-sub">38,911 total orders across all channels</div>
+        <div style="display:flex;align-items:center;gap:24px;margin-top:16px">
+          <svg id="loyDonut" viewBox="0 0 120 120" width="130" height="130"></svg>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div><div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--ochre-l)">21.3%</div><div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em">Loyalty Ratio</div></div>
+            <div><div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--moss-l)">7,818</div><div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em">Loyalty Orders</div></div>
+            <div><div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--terra-l)">$167</div><div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em">Loyalty AOV</div></div>
+          </div>
+        </div>
+
+        <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border2)">
+          <div class="cell-tag" style="margin-bottom:10px">Loyalty Signups · MTD by Country</div>
+          <div class="bar-chart" id="loyCountry">
+            <div class="brow"><div class="b-name" style="width:60px">KSA</div><div class="b-track"><div class="b-fill" style="background:var(--ochre)" data-w="85.7">6,166</div></div><div class="b-val">85.7%</div></div>
+            <div class="brow"><div class="b-name" style="width:60px">UAE</div><div class="b-track"><div class="b-fill" style="background:var(--terra)" data-w="10.1">727</div></div><div class="b-val">10.1%</div></div>
+            <div class="brow"><div class="b-name" style="width:60px">Other</div><div class="b-track"><div class="b-fill" style="background:var(--moss)" data-w="4.2">306</div></div><div class="b-val">4.2%</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pro subscription revenue -->
+      <div class="pcell span2">
+        <div class="file-badge">BI_Loyalty_Dashboard.pdf</div>
+        <div class="cell-tag">Subscription Revenue · MTD</div>
+        <div class="cell-h">Eyewa Pro &amp; Pro Max Subscription Performance</div>
+        <div class="cell-sub">Pro: $21/mo · Pro Max: $37/mo — KSA 87% of all subscriptions</div>
+        <div class="kpi-row" style="margin-top:14px">
+          <div class="kpi"><div class="kpi-v">1,089</div><div class="kpi-l">Pro Max Subs MTD</div></div>
+          <div class="kpi"><div class="kpi-v g">$40.5K</div><div class="kpi-l">Pro Max Revenue</div></div>
+          <div class="kpi"><div class="kpi-v">719</div><div class="kpi-l">Pro Subs MTD</div></div>
+          <div class="kpi"><div class="kpi-v r">$15.1K</div><div class="kpi-l">Pro Revenue</div></div>
+          <div class="kpi"><div class="kpi-v">7,199</div><div class="kpi-l">Plus Signups</div></div>
+          <div class="kpi"><div class="kpi-v">87%</div><div class="kpi-l">KSA Share</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PANEL: OPS ── -->
+  <div class="tab-panel" id="tab-ops">
+    <div class="panel-grid p-2">
+      <!-- EG Status by City -->
+      <div class="pcell">
+        <div class="file-badge">EG_Status_Dashboard.pdf</div>
+        <div class="cell-tag">EG Warehouse · Jun 2025</div>
+        <div class="cell-h">Active Orders by City</div>
+        <div class="cell-sub">3,305 total across 7 sites · Live pendency view</div>
+        <div class="city-grid" id="cityGrid" style="margin-top:14px"></div>
+      </div>
+
+      <!-- Order status donut -->
+      <div class="pcell">
+        <div class="file-badge">EG_Status_Dashboard.pdf</div>
+        <div class="cell-tag">Pendency Status Breakdown</div>
+        <div class="cell-h">EG Order Status Mix</div>
+        <div class="cell-sub">All 3,305 active warehouse orders</div>
+        <div style="display:flex;align-items:center;gap:20px;margin-top:14px;flex-wrap:wrap">
+          <svg id="egDonut" viewBox="0 0 130 130" width="130" height="130"></svg>
+          <div id="egLegend" style="display:flex;flex-direction:column;gap:7px;flex:1"></div>
+        </div>
+      </div>
+
+      <!-- Assembly pending by supplier -->
+      <div class="pcell">
+        <div class="file-badge">OPS_Assembly_orders.pdf</div>
+        <div class="cell-tag">PO Assembly Pending</div>
+        <div class="cell-h">Suppliers — Open Orders</div>
+        <div class="cell-sub">Orders aged &gt;D9 flagged</div>
+        <div class="bar-chart" id="supplierBars" style="margin-top:12px">
+          <div class="brow"><div class="b-name" style="width:90px">Spruce Sunglass</div><div class="b-track"><div class="b-fill" style="background:var(--ochre)" data-w="100">14 orders</div></div><div class="b-val">14</div></div>
+          <div class="brow"><div class="b-name" style="width:90px">Shanghai Conant</div><div class="b-track"><div class="b-fill" style="background:var(--terra)" data-w="71.4">10 orders</div></div><div class="b-val">10</div></div>
+          <div class="brow"><div class="b-name" style="width:90px">Innovative Opt.</div><div class="b-track"><div class="b-fill" style="background:var(--moss)" data-w="64.3">9 orders</div></div><div class="b-val">9</div></div>
+        </div>
+        <div style="margin-top:20px;padding-top:14px;border-top:1px solid var(--border2)">
+          <div class="cell-tag" style="margin-bottom:10px">Open Orders by Region</div>
+          <div class="bar-chart" id="regionBars">
+            <div class="brow"><div class="b-name" style="width:70px">Riyadh</div><div class="b-track"><div class="b-fill" style="background:var(--ochre)" data-w="100">115</div></div><div class="b-val">115</div></div>
+            <div class="brow"><div class="b-name" style="width:70px">Jeddah</div><div class="b-track"><div class="b-fill" style="background:var(--ochre-l);color:#0c0e0d" data-w="93">107</div></div><div class="b-val">107</div></div>
+            <div class="brow"><div class="b-name" style="width:70px">Qatar</div><div class="b-track"><div class="b-fill" style="background:var(--moss)" data-w="26">30</div></div><div class="b-val">30</div></div>
+            <div class="brow"><div class="b-name" style="width:70px">Kuwait</div><div class="b-track"><div class="b-fill" style="background:var(--terra)" data-w="23.5">27</div></div><div class="b-val">27</div></div>
+            <div class="brow"><div class="b-name" style="width:70px">Dubai</div><div class="b-track"><div class="b-fill" style="background:var(--clay)" data-w="23.5">27</div></div><div class="b-val">27</div></div>
+            <div class="brow"><div class="b-name" style="width:70px">Bahrain</div><div class="b-track"><div class="b-fill" style="background:var(--sand);color:#0c0e0d" data-w="22.6">26</div></div><div class="b-val">26</div></div>
+            <div class="brow"><div class="b-name" style="width:70px">Oman</div><div class="b-track"><div class="b-fill" style="background:var(--muted)" data-w="22.6">26</div></div><div class="b-val">26</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LMD -->
+      <div class="pcell">
+        <div class="file-badge">OPS_Assembly_orders.pdf</div>
+        <div class="cell-tag">Last Mile Delivery · LMD</div>
+        <div class="cell-h">Delivery Backlog &gt;D7</div>
+        <div class="cell-sub">Forward &amp; Reverse logistics</div>
+        <div class="kpi-row" style="margin-top:14px">
+          <div class="kpi"><div class="kpi-v r">3,800</div><div class="kpi-l">Orders &gt;D7</div></div>
+          <div class="kpi"><div class="kpi-v">1,320</div><div class="kpi-l">Forward Open</div></div>
+          <div class="kpi"><div class="kpi-v">2,418</div><div class="kpi-l">Fwd Undelivered</div></div>
+        </div>
+        <div style="margin-top:20px;padding-top:14px;border-top:1px solid var(--border2)">
+          <div class="cell-tag" style="margin-bottom:10px">PO Non-Assembly JIT · Aging</div>
+          <div class="bar-chart" id="jitBars">
+            <div class="brow"><div class="b-name" style="width:72px">Total Pending</div><div class="b-track"><div class="b-fill" style="background:var(--ochre)" data-w="100">142</div></div><div class="b-val">142</div></div>
+            <div class="brow"><div class="b-name" style="width:72px">Aged &gt;D9</div><div class="b-track"><div class="b-fill" style="background:var(--terra)" data-w="82.4">117</div></div><div class="b-val">117</div></div>
+          </div>
+        </div>
+        <div style="margin-top:20px;padding-top:14px;border-top:1px solid var(--border2)">
+          <div class="cell-tag" style="margin-bottom:10px">TO Assembly Pending Transfers</div>
+          <div class="kpi-row">
+            <div class="kpi"><div class="kpi-v">61</div><div class="kpi-l">KSA/UAE/Oman</div></div>
+            <div class="kpi"><div class="kpi-v r">33</div><div class="kpi-l">PO Assembly</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     EXPERIENCE
+     ════════════════════════════════ -->
+<section id="experience">
+  <div class="label-row reveal">
+    <div class="lbl-num">02</div>
+    <div class="lbl-txt">Career Timeline</div>
+    <div class="lbl-line"></div>
+  </div>
+  <h2 class="reveal">Eight years of <em>field work</em></h2>
+
+  <div class="timeline">
+    <div class="te">
+      <div class="te-head">
+        <div><div class="te-role">Senior Data Analyst</div><div class="te-co">eyewa · Dubai, UAE</div></div>
+        <div class="te-period">Jul 2024 – Oct 2025</div>
+      </div>
+      <ul class="te-pts">
+        <li>Designed KPI-driven Tableau dashboards for the COO — real-time SLA, team performance, and order journey efficiency across 5 countries.</li>
+        <li>Built centralised analytics frameworks integrating warehouse, operations, and customer experience data, eliminating cross-team reporting bottlenecks.</li>
+        <li>Partnered with Finance on operational spend analysis, seasonal workforce planning, and packaging cost optimisation.</li>
+        <li>Implemented 3-hour and 6-hour same-day delivery, coordinating SKU stocking strategy with warehouse teams.</li>
+      </ul>
+      <div class="tag-row"><span class="tag">Tableau</span><span class="tag">Advanced SQL</span><span class="tag m">COO Reporting</span><span class="tag m">SLA Monitoring</span><span class="tag r">5 Countries</span></div>
+    </div>
+
+    <div class="te">
+      <div class="te-head">
+        <div><div class="te-role">CRM Data Analyst</div><div class="te-co">eyewa · Dubai, UAE</div></div>
+        <div class="te-period">Jan 2022 – Jul 2024</div>
+      </div>
+      <ul class="te-pts">
+        <li>Analysed customer behaviour via Braze, Amplitude, and Google Analytics to power CRM and loyalty campaign decisions.</li>
+        <li>Structured datasets from Amazon Redshift for campaign segmentation, attribution, and multi-channel performance analysis.</li>
+        <li>Scaled QuickSight dashboards tracking campaign effectiveness, loyalty KPIs, and marketing performance across channels.</li>
+        <li>Optimised CLV, engagement, and NPS by translating data patterns into concrete campaign improvements.</li>
+      </ul>
+      <div class="tag-row"><span class="tag">Braze</span><span class="tag">Amazon Redshift</span><span class="tag m">CRM Strategy</span><span class="tag m">Loyalty</span><span class="tag r">QuickSight</span></div>
+    </div>
+
+    <div class="te">
+      <div class="te-head">
+        <div><div class="te-role">Data Analyst · BI Developer</div><div class="te-co">GMG · Dubai, UAE</div></div>
+        <div class="te-period">Sep 2021 – Dec 2021</div>
+      </div>
+      <ul class="te-pts">
+        <li>Automated Power Query and Excel reports — cut manual reporting time by 40%.</li>
+        <li>Integrated Power BI with SAP HANA and Dynamics 365 for real-time inventory and performance analytics.</li>
+      </ul>
+      <div class="tag-row"><span class="tag">Power BI</span><span class="tag">SAP HANA</span><span class="tag m">40% Time Saved</span><span class="tag r">Dynamics 365</span></div>
+    </div>
+
+    <div class="te">
+      <div class="te-head">
+        <div><div class="te-role">Data Analyst</div><div class="te-co">6thStreet.com · Dubai, UAE</div></div>
+        <div class="te-period">Feb 2021 – Sep 2021</div>
+      </div>
+      <ul class="te-pts">
+        <li>Built delivery ops reports; supported 2-hour delivery network launch in Dubai.</li>
+        <li>Automated merchandising workflows with Excel VBA macros — saved 15+ hours per week.</li>
+      </ul>
+      <div class="tag-row"><span class="tag">VBA Macros</span><span class="tag m">Last-mile Ops</span><span class="tag r">15 hrs/wk saved</span></div>
+    </div>
+
+    <div class="te">
+      <div class="te-head">
+        <div><div class="te-role">Systems Analyst — AI &amp; Robotics</div><div class="te-co">Earth One Technology · Dubai, UAE</div></div>
+        <div class="te-period">May 2019 – Feb 2021</div>
+      </div>
+      <ul class="te-pts">
+        <li>Technical consultant for SoftBank humanoid and quadruped robots (Pepper, Temi, Unitree A1).</li>
+        <li>API integration with AI facial recognition; Linux/DevOps deployment and system management.</li>
+      </ul>
+      <div class="tag-row"><span class="tag">Robotics</span><span class="tag">AI Systems</span><span class="tag m">Linux / DevOps</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     ABOUT
+     ════════════════════════════════ -->
+<section id="about">
+  <div class="label-row reveal">
+    <div class="lbl-num">03</div>
+    <div class="lbl-txt">The Analyst</div>
+    <div class="lbl-line"></div>
+  </div>
+  <h2 class="reveal">Built on <em>curiosity,</em><br>powered by data</h2>
+
+  <div class="about-layout">
+    <div class="reveal">
+      <p class="about-p">I'm a <strong>Senior Data Analyst</strong> with an MSc in Big Data & Cloud Computing and nearly a decade of experience spanning e-commerce, retail, and AI/robotics. My edge is bridging the gap between raw operational data and the decisions that actually move the needle.</p>
+      <p class="about-p">At <strong>eyewa</strong>, I built the analytics infrastructure the COO relies on to run five GCC markets — from SLA and NPS dashboards to loyalty tiers and last-mile delivery tracking. I own the full stack: SQL pipelines, Tableau design, stakeholder storytelling, and cross-functional coordination.</p>
+      <p class="about-p">What drives me is finding the <strong>hidden signal in noise</strong> — and communicating it so clearly that the right action becomes obvious. I'm deeply interested in AI applications within analytics, having worked at the intersection of data and intelligent systems early in my career.</p>
+      <div class="tools-wrap">
+        <span class="tool">Tableau</span><span class="tool">SQL / Redshift</span><span class="tool">Braze</span>
+        <span class="tool">Amplitude</span><span class="tool">QuickSight</span><span class="tool">Power BI</span>
+        <span class="tool">Google Analytics</span><span class="tool">Python</span><span class="tool">SAP HANA</span>
+        <span class="tool">VBA / Excel</span><span class="tool">Dynamics 365</span><span class="tool">Linux</span>
+        <span class="tool">API Integration</span><span class="tool">Cloud Computing</span>
+      </div>
+    </div>
+
+    <div class="reveal d1">
+      <div class="skill-panel">
+        <div class="sp-title">Core Proficiency Map</div>
+        <div class="sk-rows" id="skRows">
+          <div class="sk"><div class="sk-n">SQL / Redshift</div><div class="sk-tr"><div class="sk-f" data-w=".93"></div></div><div class="sk-p">93%</div></div>
+          <div class="sk"><div class="sk-n">Tableau</div><div class="sk-tr"><div class="sk-f" data-w=".91"></div></div><div class="sk-p">91%</div></div>
+          <div class="sk"><div class="sk-n">Data Storytelling</div><div class="sk-tr"><div class="sk-f" data-w=".90"></div></div><div class="sk-p">90%</div></div>
+          <div class="sk"><div class="sk-n">Braze / CRM</div><div class="sk-tr"><div class="sk-f" data-w=".88"></div></div><div class="sk-p">88%</div></div>
+          <div class="sk"><div class="sk-n">Ops Analytics</div><div class="sk-tr"><div class="sk-f" data-w=".87"></div></div><div class="sk-p">87%</div></div>
+          <div class="sk"><div class="sk-n">Amplitude</div><div class="sk-tr"><div class="sk-f" data-w=".82"></div></div><div class="sk-p">82%</div></div>
+          <div class="sk"><div class="sk-n">Power BI</div><div class="sk-tr"><div class="sk-f" data-w=".80"></div></div><div class="sk-p">80%</div></div>
+          <div class="sk"><div class="sk-n">Python</div><div class="sk-tr"><div class="sk-f" data-w=".68"></div></div><div class="sk-p">68%</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     EDUCATION
+     ════════════════════════════════ -->
+<section id="education">
+  <div class="label-row reveal">
+    <div class="lbl-num">04</div>
+    <div class="lbl-txt">Education &amp; Credentials</div>
+    <div class="lbl-line"></div>
+  </div>
+  <h2 class="reveal">The academic <em>foundation</em></h2>
+
+  <div class="edu-split reveal">
+    <div class="edu-c">
+      <div class="edu-deg">MSc Network Management<br>&amp; Cloud Computing</div>
+      <div class="edu-sch">Middlesex University Dubai</div>
+      <div class="edu-yr">2018 – 2019 · Dubai, UAE</div>
+    </div>
+    <div class="edu-c">
+      <div class="edu-deg">BSc Information Systems<br>&amp; Management</div>
+      <div class="edu-sch">Manipal Academy of Higher Education</div>
+      <div class="edu-yr">2013 – 2016 · Dubai, UAE</div>
+    </div>
+  </div>
+
+  <div class="cert-row reveal d1">
+    <div class="cert"><span class="cert-ico">📊</span> SQL — Intermediate</div>
+    <div class="cert"><span class="cert-ico">🗄️</span> SQL — Basics</div>
+    <div class="cert"><span class="cert-ico">📈</span> Statistics for Data Science &amp; Business Analysis</div>
+    <div class="cert"><span class="cert-ico">🔐</span> Security Systems Engineer</div>
+    <div class="cert"><span class="cert-ico">🌐</span> CCNA — Cisco</div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     CONTACT
+     ════════════════════════════════ -->
+<section id="contact">
+  <div class="label-row reveal">
+    <div class="lbl-num">05</div>
+    <div class="lbl-txt">Get in Touch</div>
+    <div class="lbl-line"></div>
+  </div>
+
+  <div class="contact-layout">
+    <div class="reveal">
+      <h2>Let's talk <em>data</em></h2>
+      <p class="contact-blurb">Open to senior analyst, BI lead, and data strategy opportunities across the GCC and beyond. I bring both the technical depth and the stakeholder communication to make data genuinely useful at the executive level.</p>
+      <div class="c-links">
+        <a href="mailto:abhishek918@outlook.com" class="c-lnk">
+          <span class="c-ico">📧</span>abhishek918@outlook.com<span class="c-arr">→</span>
+        </a>
+        <a href="tel:+971552172007" class="c-lnk">
+          <span class="c-ico">📱</span>+971 55 217 2007<span class="c-arr">→</span>
+        </a>
+        <a href="https://linkedin.com/in/abhi918" target="_blank" class="c-lnk">
+          <span class="c-ico">🔗</span>linkedin.com/in/abhi918<span class="c-arr">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="open-card reveal d1">
+      <div class="oc-title">Currently Open To</div>
+      <div class="oc-item"><span class="oc-ico">📊</span>Senior Data Analyst / <span class="oc-hl">&nbsp;Lead Analyst</span></div>
+      <div class="oc-item"><span class="oc-ico">🏗️</span>BI Engineer / <span class="oc-hl">&nbsp;Analytics Architect</span></div>
+      <div class="oc-item"><span class="oc-ico">🎯</span>CRM Analytics / <span class="oc-hl">&nbsp;Growth Analytics</span></div>
+      <div class="oc-item"><span class="oc-ico">🌍</span>GCC Markets · <span class="oc-hl">&nbsp;Dubai Preferred</span></div>
+      <div class="oc-item"><span class="oc-ico">⚡</span>Available for <span class="oc-hl">&nbsp;immediate discussion</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>© 2026 <span>Abhishek Sharma</span> · Dubai, UAE</div>
+  <div>Sr. Data Analyst · Operations &amp; CRM</div>
+  <div>Built with data, deployed with intent · <span>abhi918</span></div>
+</footer>
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT — all interactivity
+     ═══════════════════════════════════════════ -->
+<script>
+/* ── CURSOR ── */
+const c=document.getElementById('cur'),cr=document.getElementById('cur-r');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;c.style.left=mx+'px';c.style.top=my+'px'});
+(function raf(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(raf)})();
+
+/* ── TYPEWRITER ── */
+const phrases=['> analysing 5-country ops data in real-time','> building dashboards for C-level decision-making','> running CRM campaigns across 6 GCC markets','> turning warehouse backlog into actionable insight','> connecting NPS signals to service recovery workflows','> loyal customers spend 2× — the data proves it'];
+let pi=0,ci=0,del=false;
+const tt=document.getElementById('typed-text');
+function type(){
+  const p=phrases[pi];
+  if(!del){tt.textContent=p.slice(0,++ci);if(ci===p.length){del=true;setTimeout(type,1800);return}}
+  else{tt.textContent=p.slice(0,--ci);if(ci===0){del=false;pi=(pi+1)%phrases.length;setTimeout(type,400);return}}
+  setTimeout(type,del?28:46);
+}
+type();
+
+/* ── COUNT UP ── */
+function countUp(el,to,suffix='',dur=1600){
+  let s=null;
+  function f(ts){if(!s)s=ts;const p=Math.min((ts-s)/dur,1),e=1-Math.pow(1-p,3);el.textContent=Math.round(e*to)+suffix;if(p<1)requestAnimationFrame(f);}
+  requestAnimationFrame(f);
+}
+const statsObs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting){countUp(document.getElementById('s1'),8,'');countUp(document.getElementById('s2'),6,'');countUp(document.getElementById('s3'),12,'+');countUp(document.getElementById('s4'),40,'%');statsObs.unobserve(e.target);}})},{threshold:.6});
+document.querySelector('.stat-grid')&&statsObs.observe(document.querySelector('.stat-grid'));
+
+/* ── RADAR ── */
+function initRadar(){
+  const cv=document.getElementById('radarCvs');if(!cv)return;
+  const ctx=cv.getContext('2d'),W=340,H=230,cx=170,cy=115,R=90;
+  const pts=[{n:'SQL',v:.93},{n:'Tableau',v:.91},{n:'CRM',v:.88},{n:'Storytelling',v:.90},{n:'Ops',v:.87},{n:'Amplitude',v:.82},{n:'Power BI',v:.80},{n:'Python',v:.68}];
+  const N=pts.length;
+  let prog=0,started=false;
+  function draw(p){
+    ctx.clearRect(0,0,W,H);
+    [.25,.5,.75,1].forEach(r=>{
+      ctx.beginPath();
+      for(let i=0;i<N;i++){const a=i*2*Math.PI/N-Math.PI/2,x=cx+Math.cos(a)*R*r,y=cy+Math.sin(a)*R*r;i?ctx.lineTo(x,y):ctx.moveTo(x,y);}
+      ctx.closePath();ctx.strokeStyle=r===1?'rgba(69,186,154,.2)':'rgba(69,186,154,.08)';ctx.lineWidth=r===1?1:.5;ctx.stroke();
+    });
+    for(let i=0;i<N;i++){const a=i*2*Math.PI/N-Math.PI/2;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(a)*R,cy+Math.sin(a)*R);ctx.strokeStyle='rgba(69,186,154,.08)';ctx.lineWidth=.5;ctx.stroke();}
+    const dp=pts.map((s,i)=>{const a=i*2*Math.PI/N-Math.PI/2,v=s.v*p;return{x:cx+Math.cos(a)*R*v,y:cy+Math.sin(a)*R*v};});
+    ctx.beginPath();dp.forEach((d,i)=>i?ctx.lineTo(d.x,d.y):ctx.moveTo(d.x,d.y));ctx.closePath();
+    ctx.fillStyle='rgba(69,186,154,.12)';ctx.fill();ctx.strokeStyle='rgba(69,186,154,.55)';ctx.lineWidth=1.5;ctx.stroke();
+    dp.forEach(d=>{ctx.beginPath();ctx.arc(d.x,d.y,3,0,Math.PI*2);ctx.fillStyle='#45BA9A';ctx.fill();});
+    ctx.font='500 9px JetBrains Mono';ctx.textAlign='center';ctx.fillStyle='rgba(153,151,139,.8)';
+    pts.forEach((s,i)=>{const a=i*2*Math.PI/N-Math.PI/2,x=cx+Math.cos(a)*(R+20),y=cy+Math.sin(a)*(R+20)+3;ctx.fillText(s.n,x,y);});
+  }
+  let st=null;
+  function anim(ts){if(!st)st=ts;prog=Math.min((ts-st)/1400,1);draw(1-Math.pow(1-prog,3));if(prog<1)requestAnimationFrame(anim);}
+  new IntersectionObserver(en=>{if(en[0].isIntersecting&&!started){started=true;requestAnimationFrame(anim);}},{threshold:.3}).observe(cv);
+}
+initRadar();
+
+/* ── NPS LINE CHART ── */
+function initNPS(){
+  const overall=[62,56,54,37,26,43,63,61,63,46,39,49,48,48,62,64,70];
+  const offline=[65,62,52,40,29,47,67,65,67,51,45,51,55,54,63,64,70];
+  const online= [54,46,59,26,17,27,36,30,31,28,23,37,13,18,53,59,70];
+  const months=['Nov 24','Dec 24','Jan 25','Feb 25','Mar 25','Apr 25','May 25','Jun 25','Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26'];
+  const W=700,H=190,pad={t:10,b:30,l:8,r:30};
+  const pW=W-pad.l-pad.r,pH=H-pad.t-pad.b;
+  const minV=10,maxV=78;
+  const xS=(i)=>pad.l+i*pW/(overall.length-1);
+  const yS=(v)=>pad.t+pH-(v-minV)/(maxV-minV)*pH;
+
+  const svg=document.getElementById('npsSvg');
+  // Grid lines
+  const g=document.getElementById('npsGrid'),lb=document.getElementById('npsLabels');
+  [20,35,50,65].forEach(v=>{
+    const l=document.createElementNS('http://www.w3.org/2000/svg','line');
+    l.setAttribute('x1',pad.l);l.setAttribute('x2',W-pad.r+20);
+    l.setAttribute('y1',yS(v));l.setAttribute('y2',yS(v));
+    l.setAttribute('stroke','rgba(28,33,30,.9)');l.setAttribute('stroke-width','1');g.appendChild(l);
+    const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+    t.setAttribute('x',W-pad.r+24);t.setAttribute('y',yS(v)+3);
+    t.setAttribute('fill','#575757');t.setAttribute('font-size','7');t.setAttribute('font-family','JetBrains Mono');
+    t.textContent=v;lb.appendChild(t);
+  });
+  months.forEach((m,i)=>{
+    if(i%2===0){
+      const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('x',xS(i));t.setAttribute('y',H-2);
+      t.setAttribute('fill','#575757');t.setAttribute('font-size','7');
+      t.setAttribute('text-anchor','middle');t.setAttribute('font-family','JetBrains Mono');
+      t.textContent=m;lb.appendChild(t);
+    }
+  });
+
+  function makeLine(data){return data.map((v,i)=>`${i?'L':'M'}${xS(i)},${yS(v)}`).join(' ')}
+  function makeArea(data){return makeLine(data)+` L${xS(data.length-1)},${H-pad.b} L${pad.l},${H-pad.b} Z`}
+
+  document.getElementById('npsLinePath').setAttribute('d',makeLine(overall));
+  document.getElementById('offLinePath').setAttribute('d',makeLine(offline));
+  document.getElementById('onlLinePath').setAttribute('d',makeLine(online));
+  document.getElementById('npsAreaPath').setAttribute('d',makeArea(overall));
+  document.getElementById('offAreaPath').setAttribute('d',makeArea(offline));
+
+  // Hover points
+  const gp=document.getElementById('npsPoints');
+  overall.forEach((v,i)=>{
+    const ci=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    ci.setAttribute('cx',xS(i));ci.setAttribute('cy',yS(v));ci.setAttribute('r','5');
+    ci.setAttribute('fill','transparent');ci.setAttribute('stroke','transparent');ci.setAttribute('stroke-width','12');
+    ci.style.cursor='crosshair';
+    const tip=document.getElementById('tip');
+    ci.addEventListener('mouseenter',()=>{
+      tip.style.opacity='1';
+      tip.textContent=`${months[i]} | Overall: ${v} | Offline: ${offline[i]} | Online: ${online[i]}`;
+    });
+    ci.addEventListener('mousemove',e=>{tip.style.left=(e.clientX+14)+'px';tip.style.top=(e.clientY-10)+'px'});
+    ci.addEventListener('mouseleave',()=>{tip.style.opacity='0'});
+    gp.appendChild(ci);
+  });
+
+  // Animate paths
+  ['npsLinePath','offLinePath','onlLinePath'].forEach((id,i)=>{
+    const p=document.getElementById(id);
+    const len=p.getTotalLength();
+    p.style.strokeDasharray=len;p.style.strokeDashoffset=len;
+    new IntersectionObserver(en=>{
+      if(en[0].isIntersecting){
+        p.style.transition=`stroke-dashoffset ${1.4+i*.2}s cubic-bezier(.25,.46,.45,.94) ${i*.1}s`;
+        p.style.strokeDashoffset='0';
+      }
+    },{threshold:.2}).observe(svg.closest('.pcell'));
+  });
+}
+initNPS();
+
+/* ── DETRACTOR BAR CHART ── */
+function initDetractor(){
+  const data=[626,498,464,414,407,381,451,415,351,626,498,464,1057];
+  const labels=['Dec23','Feb24','Apr24','Jun24','Aug24','Oct24','Dec24','Feb25','Apr25','May25'];
+  const svg=document.getElementById('detSvg');if(!svg)return;
+  const W=300,H=150,barW=20,gap=4;
+  const maxV=Math.max(...data);
+  data.forEach((v,i)=>{
+    const x=i*(barW+gap)+4,bH=(v/maxV)*(H-25),y=H-25-bH;
+    const r=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    r.setAttribute('x',x);r.setAttribute('y',H-25);r.setAttribute('width',barW);r.setAttribute('height','0');
+    r.setAttribute('fill',v===1057?'#3a8a74':v>500?'#45BA9A':'#2d7a66');r.setAttribute('rx','2');
+    r.setAttribute('opacity','.85');
+    const tip=document.getElementById('tip');
+    r.addEventListener('mouseenter',()=>{tip.style.opacity='1';tip.textContent=`${labels[i]||''}: ${v} detractors`;r.setAttribute('opacity','1');});
+    r.addEventListener('mousemove',e=>{tip.style.left=(e.clientX+14)+'px';tip.style.top=(e.clientY-10)+'px'});
+    r.addEventListener('mouseleave',()=>{tip.style.opacity='0';r.setAttribute('opacity','.85');});
+    svg.appendChild(r);
+    new IntersectionObserver(en=>{
+      if(en[0].isIntersecting){
+        r.animate([{transform:`translateY(0)`,height:'0'},{height:`${bH}px`}],{duration:0,fill:'forwards'});
+        r.setAttribute('y',y);
+        r.style.transition='height 1s ease, y 1s ease';
+        setTimeout(()=>{r.setAttribute('height',bH);},i*60);
+      }
+    },{threshold:.2}).observe(svg.closest('.pcell'));
+  });
+  // x-axis
+  const ax=document.createElementNS('http://www.w3.org/2000/svg','line');
+  ax.setAttribute('x1','0');ax.setAttribute('y1',H-25);ax.setAttribute('x2',W);ax.setAttribute('y2',H-25);
+  ax.setAttribute('stroke','rgba(156,218,201,.3)');ax.setAttribute('stroke-width','1');svg.appendChild(ax);
+  ['Dec23','','Jun24','','Dec24','','May25'].forEach((l,i)=>{
+    if(!l)return;
+    const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+    t.setAttribute('x',i*(barW+gap)*2+4+barW/2);t.setAttribute('y',H-8);
+    t.setAttribute('fill','#575757');t.setAttribute('font-size','6.5');
+    t.setAttribute('text-anchor','middle');t.setAttribute('font-family','JetBrains Mono');
+    t.textContent=l;svg.appendChild(t);
+  });
+}
+initDetractor();
+
+/* ── ETB MONTHLY BAR ── */
+function initETBBar(){
+  const vals=[13068,10837,9953,9092,9013,8255,8161,7806];
+  const lbs=['Sep25','Oct25','Nov25','Dec25','Jan26','Feb26','Mar26','Apr26'];
+  const svg=document.getElementById('etbBar');if(!svg)return;
+  const W=300,H=120,barW=28,gap=5;
+  const max=Math.max(...vals);
+  vals.forEach((v,i)=>{
+    const bH=(v/max)*(H-20),x=i*(barW+gap)+4,y=H-20-bH;
+    const r=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    r.setAttribute('x',x);r.setAttribute('y',H-20);r.setAttribute('width',barW);r.setAttribute('height','0');
+    r.setAttribute('fill',i===0?'#45BA9A':'#2d7a66');r.setAttribute('rx','2');r.setAttribute('opacity','.85');
+    const tip=document.getElementById('tip');
+    r.addEventListener('mouseenter',()=>{tip.style.opacity='1';tip.textContent=`${lbs[i]}: ${v.toLocaleString()} ETB customers`;r.setAttribute('opacity','1');});
+    r.addEventListener('mousemove',e=>{tip.style.left=(e.clientX+14)+'px';tip.style.top=(e.clientY-10)+'px'});
+    r.addEventListener('mouseleave',()=>{tip.style.opacity='0';r.setAttribute('opacity','.85');});
+    svg.appendChild(r);
+    new IntersectionObserver(en=>{
+      if(en[0].isIntersecting){setTimeout(()=>{r.setAttribute('y',y);r.setAttribute('height',bH);r.style.transition='all .8s ease';},i*80);}
+    },{threshold:.2}).observe(svg.closest?svg.closest('.pcell'):svg);
+    const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+    t.setAttribute('x',x+barW/2);t.setAttribute('y',H-4);
+    t.setAttribute('fill','#575757');t.setAttribute('font-size','6.5');
+    t.setAttribute('text-anchor','middle');t.setAttribute('font-family','JetBrains Mono');
+    t.textContent=lbs[i]||'';svg.appendChild(t);
+  });
+}
+initETBBar();
+
+/* ── WA SPARKLINE ── */
+function initWASpark(){
+  const rates=[35.2,34.8,33.1,38.4,42.9,41.2,39.8,38.1,37.6,36.9,35.4,31.8];
+  const svg=document.getElementById('waSpark');if(!svg)return;
+  const W=280,H=50,n=rates.length;
+  const min=Math.min(...rates)-2,max=Math.max(...rates)+2;
+  const xS=i=>i*(W-10)/(n-1)+5;
+  const yS=v=>H-5-(v-min)/(max-min)*(H-10);
+  const d=rates.map((v,i)=>`${i?'L':'M'}${xS(i)},${yS(v)}`).join(' ');
+  const area=d+` L${xS(n-1)},${H} L5,${H} Z`;
+  const defs=document.createElementNS('http://www.w3.org/2000/svg','defs');
+  const grad=document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
+  grad.setAttribute('id','waGrad');grad.setAttribute('x1','0');grad.setAttribute('y1','0');grad.setAttribute('x2','0');grad.setAttribute('y2','1');
+  const s1=document.createElementNS('http://www.w3.org/2000/svg','stop');s1.setAttribute('offset','0%');s1.setAttribute('stop-color','#9CDAC9');s1.setAttribute('stop-opacity','.3');
+  const s2=document.createElementNS('http://www.w3.org/2000/svg','stop');s2.setAttribute('offset','100%');s2.setAttribute('stop-color','#9CDAC9');s2.setAttribute('stop-opacity','0');
+  grad.appendChild(s1);grad.appendChild(s2);defs.appendChild(grad);svg.appendChild(defs);
+  const ap=document.createElementNS('http://www.w3.org/2000/svg','path');ap.setAttribute('d',area);ap.setAttribute('fill','url(#waGrad)');svg.appendChild(ap);
+  const lp=document.createElementNS('http://www.w3.org/2000/svg','path');lp.setAttribute('d',d);lp.setAttribute('fill','none');lp.setAttribute('stroke','#9CDAC9');lp.setAttribute('stroke-width','1.5');lp.setAttribute('stroke-linecap','round');svg.appendChild(lp);
+  const len=lp.getTotalLength();lp.style.strokeDasharray=len;lp.style.strokeDashoffset=len;
+  new IntersectionObserver(en=>{if(en[0].isIntersecting){lp.style.transition='stroke-dashoffset 1.2s ease';lp.style.strokeDashoffset='0';}},{threshold:.2}).observe(svg.closest('.pcell')||svg);
+}
+initWASpark();
+
+/* ── REVENUE SVG SPARKLINE ── */
+function initRevSvg(){
+  const data=[4303,3101,3340,4368,3773,3026,2489,5011,4659,4399,3278,4502,3945,3005,3744,2951,10353,8413,6634];
+  const svg=document.getElementById('revSvg');if(!svg)return;
+  const W=700,H=140;
+  const max=Math.max(...data);
+  const xS=i=>i*(W-20)/(data.length-1)+10;
+  const yS=v=>H-10-(v/max)*(H-20);
+  const d=data.map((v,i)=>`${i?'L':'M'}${xS(i)},${yS(v)}`).join(' ');
+  const area=d+` L${xS(data.length-1)},${H} L10,${H} Z`;
+  const defs=document.createElementNS('http://www.w3.org/2000/svg','defs');
+  const gr=document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
+  gr.setAttribute('id','revGrad');gr.setAttribute('x1','0');gr.setAttribute('y1','0');gr.setAttribute('x2','0');gr.setAttribute('y2','1');
+  ['0%','100%'].forEach((o,i)=>{const s=document.createElementNS('http://www.w3.org/2000/svg','stop');s.setAttribute('offset',o);s.setAttribute('stop-color','#45BA9A');s.setAttribute('stop-opacity',i?'0':'.25');gr.appendChild(s);});
+  defs.appendChild(gr);svg.appendChild(defs);
+  const ap=document.createElementNS('http://www.w3.org/2000/svg','path');ap.setAttribute('d',area);ap.setAttribute('fill','url(#revGrad)');svg.appendChild(ap);
+  const lp=document.createElementNS('http://www.w3.org/2000/svg','path');lp.setAttribute('d',d);lp.setAttribute('fill','none');lp.setAttribute('stroke','#45BA9A');lp.setAttribute('stroke-width','2');lp.setAttribute('stroke-linecap','round');svg.appendChild(lp);
+  const len=lp.getTotalLength();lp.style.strokeDasharray=len;lp.style.strokeDashoffset=len;
+  const tip=document.getElementById('tip');
+  data.forEach((v,i)=>{
+    const hitArea=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    hitArea.setAttribute('cx',xS(i));hitArea.setAttribute('cy',yS(v));hitArea.setAttribute('r','8');
+    hitArea.setAttribute('fill','transparent');hitArea.style.cursor='crosshair';
+    hitArea.addEventListener('mouseenter',()=>{tip.style.opacity='1';tip.textContent=`Day ${i+1}: ${v.toLocaleString()} revenue`;});
+    hitArea.addEventListener('mousemove',e=>{tip.style.left=(e.clientX+14)+'px';tip.style.top=(e.clientY-10)+'px'});
+    hitArea.addEventListener('mouseleave',()=>{tip.style.opacity='0'});
+    svg.appendChild(hitArea);
+  });
+  new IntersectionObserver(en=>{if(en[0].isIntersecting){lp.style.transition='stroke-dashoffset 1.5s ease';lp.style.strokeDashoffset='0';}},{threshold:.1}).observe(svg.closest('.pcell')||svg);
+}
+initRevSvg();
+
+/* ── CRM RINGS ── */
+function initCRMRings(){
+  const channels=[
+    {n:'WA Delivery',pct:75.1,col:'#45BA9A',sub:'498K/664K'},
+    {n:'WA Read',pct:54.6,col:'#9CDAC9',sub:'272K read'},
+    {n:'Email Deliv.',pct:96.2,col:'#2d7a66',sub:'1.3M/1.4M'},
+    {n:'Email Open',pct:43.4,col:'#9CDAC9',sub:'572K opens'},
+    {n:'Push Recv.',pct:81.1,col:'#3a8a74',sub:'3.6M recv.'},
+  ];
+  const wrap=document.getElementById('crmRings');if(!wrap)return;
+  channels.forEach(ch=>{
+    const R=30,c=2*Math.PI*R;
+    const div=document.createElement('div');div.className='ring-w';
+    const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.setAttribute('viewBox','0 0 76 76');svg.setAttribute('width','76');svg.setAttribute('height','76');
+    const bg=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    bg.setAttribute('cx','38');bg.setAttribute('cy','38');bg.setAttribute('r','30');
+    bg.setAttribute('fill','none');bg.setAttribute('stroke','rgba(255,255,255,.05)');bg.setAttribute('stroke-width','7');
+    const fg=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    fg.setAttribute('cx','38');fg.setAttribute('cy','38');fg.setAttribute('r','30');
+    fg.setAttribute('fill','none');fg.setAttribute('stroke',ch.col);fg.setAttribute('stroke-width','7');
+    fg.setAttribute('stroke-linecap','round');fg.setAttribute('transform','rotate(-90 38 38)');
+    fg.style.strokeDasharray=c;fg.style.strokeDashoffset=c;
+    fg.style.filter=`drop-shadow(0 0 5px ${ch.col}88)`;
+    const tv=document.createElementNS('http://www.w3.org/2000/svg','text');
+    tv.setAttribute('x','38');tv.setAttribute('y','42');tv.setAttribute('text-anchor','middle');
+    tv.setAttribute('fill',ch.col);tv.setAttribute('font-size','11');tv.setAttribute('font-weight','bold');
+    tv.setAttribute('font-family','Cormorant Garamond,serif');tv.textContent=ch.pct+'%';
+    svg.appendChild(bg);svg.appendChild(fg);svg.appendChild(tv);
+    const name=document.createElement('div');name.className='ring-n';name.textContent=ch.n;
+    const sub=document.createElement('div');sub.className='ring-s';sub.textContent=ch.sub;
+    div.appendChild(svg);div.appendChild(name);div.appendChild(sub);
+    wrap.appendChild(div);
+    new IntersectionObserver(en=>{if(en[0].isIntersecting){fg.style.transition='stroke-dashoffset 1.3s cubic-bezier(.25,.46,.45,.94)';fg.style.strokeDashoffset=c*(1-ch.pct/100);}},{threshold:.2}).observe(wrap);
+  });
+}
+initCRMRings();
+
+/* ── LOYALTY DONUT ── */
+function initLoyDonut(){
+  const svg=document.getElementById('loyDonut');if(!svg)return;
+  const data=[{v:7818,c:'#45BA9A',l:'Loyalty'},{v:31093,c:'rgba(69,186,154,.15)',l:'Non-Loyalty'}];
+  const total=data.reduce((a,b)=>a+b.v,0);
+  let ang=-Math.PI/2;
+  data.forEach(d=>{
+    const sweep=d.v/total*2*Math.PI;
+    const x1=60+Math.cos(ang)*44,y1=60+Math.sin(ang)*44;
+    const x2=60+Math.cos(ang+sweep)*44,y2=60+Math.sin(ang+sweep)*44;
+    const xi=60+Math.cos(ang)*22,yi=60+Math.sin(ang)*22;
+    const xj=60+Math.cos(ang+sweep)*22,yj=60+Math.sin(ang+sweep)*22;
+    const lg=sweep>Math.PI?1:0;
+    const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+    p.setAttribute('d',`M${x1},${y1} A44,44,0,${lg},1,${x2},${y2} L${xj},${yj} A22,22,0,${lg},0,${xi},${yi} Z`);
+    p.setAttribute('fill',d.c);p.setAttribute('opacity','.9');svg.appendChild(p);ang+=sweep;
+  });
+  const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+  t.setAttribute('x','60');t.setAttribute('y','64');t.setAttribute('text-anchor','middle');
+  t.setAttribute('fill','#45BA9A');t.setAttribute('font-size','14');t.setAttribute('font-weight','bold');
+  t.setAttribute('font-family','Cormorant Garamond,serif');t.textContent='21.3%';svg.appendChild(t);
+  const t2=document.createElementNS('http://www.w3.org/2000/svg','text');
+  t2.setAttribute('x','60');t2.setAttribute('y','76');t2.setAttribute('text-anchor','middle');
+  t2.setAttribute('fill','#575757');t2.setAttribute('font-size','7');t2.setAttribute('font-family','JetBrains Mono');
+  t2.textContent='LOYALTY';svg.appendChild(t2);
+}
+initLoyDonut();
+
+/* ── EG CITY GRID ── */
+function initCityGrid(){
+  const grid=document.getElementById('cityGrid');if(!grid)return;
+  const cities=[
+    {n:'Jeddah',v:734,mx:734},{n:'Dubai',v:376,mx:734},{n:'Riyadh',v:280,mx:734},
+    {n:'Kuwait',v:218,mx:734},{n:'Oman',v:171,mx:734},{n:'Qatar',v:196,mx:734},{n:'Bahrain',v:330,mx:734}
+  ];
+  cities.forEach(c=>{
+    const div=document.createElement('div');div.className='city-card';
+    div.innerHTML=`<div class="city-n">${c.n}</div><div class="city-total">${c.v}</div><div class="city-bar" style="width:${(c.v/c.mx)*100}%;height:3px;background:var(--ochre)"></div>`;
+    const tip=document.getElementById('tip');
+    div.addEventListener('mouseenter',()=>{tip.style.opacity='1';tip.textContent=`${c.n}: ${c.v} active EG orders`;});
+    div.addEventListener('mousemove',e=>{tip.style.left=(e.clientX+14)+'px';tip.style.top=(e.clientY-10)+'px'});
+    div.addEventListener('mouseleave',()=>{tip.style.opacity='0'});
+    grid.appendChild(div);
+  });
+}
+initCityGrid();
+
+/* ── EG STATUS DONUT ── */
+function initEGDonut(){
+  const svg=document.getElementById('egDonut'),leg=document.getElementById('egLegend');if(!svg)return;
+  const data=[
+    {l:'Lenses Ordered',v:1261,c:'#45BA9A'},{l:'No Frame',v:713,c:'#3a8a74'},
+    {l:'Repair',v:538,c:'#2d7a66'},{l:'In Progress',v:301,c:'#6a8f86'},
+    {l:'No PR',v:209,c:'#9CDAC9'},{l:'Others',v:283,c:'#575757'},
+  ];
+  const total=data.reduce((a,b)=>a+b.v,0),cx=65,cy=65,R=50,r=28;
+  let ang=-Math.PI/2;
+  data.forEach(d=>{
+    const sweep=d.v/total*2*Math.PI;
+    const x1=cx+Math.cos(ang)*R,y1=cy+Math.sin(ang)*R;
+    const x2=cx+Math.cos(ang+sweep)*R,y2=cy+Math.sin(ang+sweep)*R;
+    const xi=cx+Math.cos(ang)*r,yi=cy+Math.sin(ang)*r;
+    const xj=cx+Math.cos(ang+sweep)*r,yj=cy+Math.sin(ang+sweep)*r;
+    const lg=sweep>Math.PI?1:0;
+    const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+    p.setAttribute('d',`M${x1},${y1} A${R},${R},0,${lg},1,${x2},${y2} L${xj},${yj} A${r},${r},0,${lg},0,${xi},${yi} Z`);
+    p.setAttribute('fill',d.c);p.setAttribute('opacity','.88');
+    p.style.transition='transform .2s,opacity .2s';p.style.transformOrigin=`${cx}px ${cy}px`;
+    const tip=document.getElementById('tip');
+    p.addEventListener('mouseenter',()=>{p.style.transform='scale(1.06)';p.style.opacity='1';tip.style.opacity='1';tip.textContent=`${d.l}: ${d.v} orders (${(d.v/total*100).toFixed(1)}%)`;});
+    p.addEventListener('mousemove',e=>{tip.style.left=(e.clientX+14)+'px';tip.style.top=(e.clientY-10)+'px'});
+    p.addEventListener('mouseleave',()=>{p.style.transform='';p.style.opacity='.88';tip.style.opacity='0';});
+    svg.appendChild(p);ang+=sweep;
+    const li=document.createElement('div');
+    li.style.cssText='display:flex;align-items:center;gap:6px;font-size:9px;color:#99978B;';
+    li.innerHTML=`<div style="width:7px;height:7px;border-radius:50%;background:${d.c};flex-shrink:0"></div><span style="flex:1">${d.l}</span><span style="color:${d.c};font-weight:500">${d.v}</span>`;
+    leg.appendChild(li);
+  });
+  const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+  t.setAttribute('x',cx);t.setAttribute('y',cy-3);t.setAttribute('text-anchor','middle');
+  t.setAttribute('fill','#45BA9A');t.setAttribute('font-size','16');t.setAttribute('font-weight','bold');
+  t.setAttribute('font-family','Cormorant Garamond,serif');t.textContent='3,305';svg.appendChild(t);
+  const t2=document.createElementNS('http://www.w3.org/2000/svg','text');
+  t2.setAttribute('x',cx);t2.setAttribute('y',cy+11);t2.setAttribute('text-anchor','middle');
+  t2.setAttribute('fill','#575757');t2.setAttribute('font-size','7');t2.setAttribute('font-family','JetBrains Mono');
+  t2.textContent='EG ORDERS';svg.appendChild(t2);
+}
+initEGDonut();
+
+/* ── TABS ── */
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+    // Trigger bar animations for newly visible panel
+    setTimeout(()=>triggerBars(document.getElementById('tab-'+btn.dataset.tab)),50);
+  });
+});
+
+/* ── BAR TRIGGERS ── */
+function triggerBars(root){
+  (root||document).querySelectorAll('.b-fill[data-w], .f-fill[data-w]').forEach(el=>{
+    if(!el.dataset.triggered){
+      el.dataset.triggered='1';
+      el.style.transition='width 1.3s cubic-bezier(.22,.68,0,1.2)';
+      el.style.width=el.dataset.w+'%';
+    }
+  });
+}
+// Initial trigger for visible tab
+const barObs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting)triggerBars(e.target);})},{threshold:.1});
+document.querySelectorAll('.tab-panel.active').forEach(p=>barObs.observe(p));
+document.querySelectorAll('.panel-grid').forEach(p=>barObs.observe(p));
+
+/* ── SKILL BARS ── */
+const skObs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting)e.target.querySelectorAll('.sk-f').forEach(f=>{f.style.transform=`scaleX(${f.dataset.w})`;f.classList.add('vis');});})},{threshold:.2});
+document.querySelectorAll('.skill-panel').forEach(e=>skObs.observe(e));
+
+/* ── REVEAL ── */
+const revObs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');})},{threshold:.06,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal,.te').forEach(e=>revObs.observe(e));
+
+/* ── ACTIVE NAV ── */
+const secs=document.querySelectorAll('section[id]');
+const navAs=document.querySelectorAll('nav ul a');
+window.addEventListener('scroll',()=>{
+  let cur='';secs.forEach(s=>{if(scrollY>=s.offsetTop-140)cur=s.id;});
+  navAs.forEach(a=>{a.classList.remove('active');if(a.getAttribute('href')==='#'+cur)a.classList.add('active');});
+},{passive:true});
+</script>
+</body>
+</html>
